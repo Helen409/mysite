@@ -1,6 +1,7 @@
 <?php
 function saveBasket(){
 	global $basket;
+	//print_r($basket);
 	$basket=base64_encode(serialize($basket));
 	setcookie('basket', $basket, 0x7FFFFFFF);
 	

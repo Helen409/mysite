@@ -24,7 +24,7 @@
 </tr>
 <?php
 	//global $basket;
-	print_r($basket);
+	//print_r($basket);
 		$i=0;
 		$sum=0;
 	if (count($basket==1)){
