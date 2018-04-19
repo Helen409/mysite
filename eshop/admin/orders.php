@@ -1,7 +1,10 @@
 <?php
-	require "secure/session.inc.php";
+	//require "secure/session.inc.php";
 	require "../inc/lib.inc.php";
 	require "../inc/db.inc.php";
+	$orders=getOrders();
+	echo '<pre>';
+	//print_r($orders);
 ?>
 <html>
 <head>
@@ -10,15 +13,17 @@
 <body>
 <h1>Поступившие заказы:</h1>
 <?php
+foreach ($orders as $order){
+
 
 ?>
 <hr>
-<h2>Заказ номер: </h2>
-<p><b>Заказчик</b>: </p>
-<p><b>Email</b>: </p>
-<p><b>Телефон</b>: </p>
-<p><b>Адрес доставки</b>: </p>
-<p><b>Дата размещения заказа</b>: </p>
+<h2>Заказ номер:<?php echo $order['orderid'] ?></h2>
+<p><b>Заказчик</b>: <?php echo $order['name'] ?></p>
+<p><b>Email</b>: <?php echo $order['email'] ?></p>
+<p><b>Телефон</b>: <?php echo $order['phone'] ?></p>
+<p><b>Адрес доставки</b>: <?php echo $order['address'] ?></p>
+<p><b>Дата размещения заказа</b>: <?php echo time('%D',$order['date']) ?></p>
 
 <h3>Купленные товары:</h3>
 <table border="1" cellpadding="5" cellspacing="0" width="90%">
@@ -29,11 +34,34 @@
 	<th>Год издания</th>
 	<th>Цена, руб.</th>
 	<th>Количество</th>
+	<th>Сумма</th>
 </tr>
 
+<?php
+$i=0;$sum=0;
+foreach ($order['goods'] as $item){
+	//print_r($item);
+	$i++;
+	$sum+=$item['price']*$item['quantity'];
+	
+?>
+<tr>
+		<td><?php echo $item['id']?></td>
+		<td><?php echo $item['title']?></td>
+		<td><?php echo $item['author']?></td>
+		<td><?php echo $item['pubyear']?></td>
+		<td><?php echo $item['price']?></td>
+		<td><?php echo $item['quantity']?></td>
+		<td><?php echo $item['price']*$item['quantity']?></td>
+</tr>
 
+<?php	
+}
+?>
 </table>
-<p>Всего товаров в заказе на сумму: руб.</p>
-
+<p>Всего товаров в заказе <?php echo $i?> на сумму: <?php echo $sum?> руб.</p>
+<?php
+}
+?>
 </body>
 </html>

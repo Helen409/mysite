@@ -29,17 +29,6 @@ foreach ($items as $item){
 		<td><a href="add2basket.php?id=<?php echo $item['id'];?>">В корзину</a></td>
 <?php
 }
-if($_SERVER['REQUEST_METHOD'] == "GET") {
-		$id = (int)(trim(strip_tags($_GET['id'])));
-	$basket['id']=$id;
-	$basket['title']=$item['title'];
-	$basket['author']=$item['author'];
-	$basket['pubyear']=$item['pubyear'];
-	$basket['price']=$item['price'];	
-	//print_r($basket);
-	}
-	$count=count($basket,0);
-//	echo $count;
 ?>
 </table>
 </body>

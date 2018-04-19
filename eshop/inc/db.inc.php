@@ -1,5 +1,6 @@
 <?php
-//header('Content-Type=utf-8');
+	ob_start();
+header('Content-Type=utf-8');
 define('DB_HOST','localhost');
 define('DB_LOGIN','root');
 define('DB_PASSWORD','');

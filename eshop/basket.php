@@ -27,22 +27,27 @@
 	//print_r($basket);
 		$i=0;
 		$sum=0;
-	if (count($basket==1)){
+	if (count($basket)==1){
 		echo '<A href="catalog.php">товаров в корзине нет, вернуться в каталог</a><p></p>';
-	}else{
+	} else echo '<a href="catalog.php">Вернуться в каталог</a><p></p>';
+		
 		$items=myBasket();
-
+		//print_r($items);
 		foreach ($items as $item){
-			$i++;$sum+=$item['price'];
+			$i++;
+			$sum+=$item['price'];
 	?>
 	<tr>
+	
+		<td><?php echo $item['id']?></td>
 		<td><?php echo $item['title']?></td>
 		<td><?php echo $item['author']?></td>
 		<td><?php echo $item['pubyear']?></td>
 		<td><?php echo $item['price']?></td>
-		<td><a href="delete_from_basket.php?id=<?php echo $item['id'];?>">В корзину</a></td>
+		<td><?php echo $item['quantity']?></td>
+		<td><a href="delete_from_basket.php?del=<?php echo $item['id'];?>">Удалить</a></td>
 <?php
-}}
+}
 //echo '<p>Всего товаров в корзине: ',$i,' на сумму ',$sum;
 	
 ?>
