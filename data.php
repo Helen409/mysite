@@ -1,6 +1,6 @@
 		<?php
 			setlocale(LC_ALL, 'russian');
-	ini_set('display_errors',1);
+	ini_set('display_errors',0);
 	ini_set('error_reporting', E_ALL);
 			$day=strftime('%d');
 			$mon=(int)strftime('%m');
@@ -35,5 +35,6 @@
 				array('link'=>'Таблица умножения', 'href'=>'index.php?id=table'),
 				array('link'=>'Калькулятор',       'href'=>'index.php?id=calc'),
 				array('link'=>'Тест',       'href'=>'test/index.php'),
+				array('link'=>'Гостевая книга',       'href'=>'index.php?id=gbook'),
 			);
 		?>

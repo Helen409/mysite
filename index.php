@@ -22,6 +22,9 @@ include 'data.php';
 		case 'calc':$title='Онлайн калькулятор';
 		             $header='Калькулятор';
 								 break;
+		case 'gbook':$title='Гостевая книга';
+		             $header='Гостевая книга';
+								 break;
 	 }	
 	 ?>
 	<head>
@@ -59,6 +62,7 @@ include 'data.php';
 		case 'contact':include 'contact.php';break;
 		case 'table':include 'table.php';break;
 		case 'calc':include 'calc.php';break;
+		case 'gbook':include 'gbook.inc.php';break;
 		default:	include 'content.php';
 	}
 
