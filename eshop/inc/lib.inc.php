@@ -1,4 +1,10 @@
 <?php
+function saveBasket(){
+	global $basket;
+	$basket=base64_encode(serialize($basket));
+	setcookie('basket', $basket, 0x7FFFFFFF);
+	
+}
 function addItemToCatalog($title, $author, $pubyear, $price){
 	global $link;
 	$sql='insert into catalog (title,author,pubyear, price) values(?,?,?,?)';
@@ -17,12 +23,7 @@ function selectAllItems(){
 	mysqli_free_result($result);
 	return $items;
 }	
-function saveBasket(){
-	global $basket;
-	$basket=base64_encode(serialize($basket));
-	setcookie('basket', $basket, 0x7FFFFFFF);
-	
-}
+
 	/*function uniqid(){
 		$i=0;$len=15;
 		$chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -43,5 +44,33 @@ function basketInit(){
 		$basket=unserialize(base64_decode($_COOKIE['basket']));
 		$count=count($basket)-1;
 	}
+}
+function addToBasket($id){
+	global $basket;
+	$basket['id']=1;
+	saveBasket();
+}
+function myBasket(){
+	global $link,$basket;
+	$goods=array_keys($basket);
+	array_shift($goods);
+	$ids=implode(",",$goods);
+	$sql="select id,author, title, pubyear, price from catalog where id in ($ids)";
+	if (!$result=mysqli_query($link, $sql)) return false;
+	$items=result2Array($result);
+	mysqli_free_result($result);
+	return $items;
+}
+function result2Array($data){
+	global $basket;
+	$arr=array();
+	while ($row=mysqli_fetch_assoc($data)){
+		$row['quantity']=$basket[$row['id']];
+		$arr[]=$row;
+	}
+	return $arr;
+}
+function deleteItemFromBasket($id){
+	
 }
 ?>
