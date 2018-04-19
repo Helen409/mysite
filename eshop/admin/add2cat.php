@@ -1,5 +1,5 @@
 <?
-require "secure/session.inc.php";
+//require "secure/session.inc.php";
 ?>
 <html>
 <head>

@@ -1,3 +1,4 @@
+
 <!-- Основные настройки -->
 <?php
 define('DB_HOST','localhost');
@@ -7,7 +8,28 @@ define('DB_NAME','qbook');
 $link=mysqli_connect(DB_HOST,DB_LOGIN,DB_PASSWORD,DB_NAME);
 ?>
 <!-- Основные настройки -->
+<!-- Удаление записи из БД -->
+<?php
+if ($_SERVER['REQUEST_METHOD']=='GET'){
+	if (isset($_GET['del'])){
+		$delid=(int)$_GET['del'];
 
+		if (strripos($_SERVER['REQUEST_URI'],'&')){
+			$i=strripos($_SERVER['REQUEST_URI'],'&');
+			$str=substr($_SERVER['REQUEST_URI'],0,($i));
+			//echo $str,'<br>';
+		}
+
+		$sql="delete from msgs where id='$delid'";
+		mysqli_query($link,$sql);
+		header('Location: '.$str);
+		//exit();
+		
+		
+	}
+}
+?>
+<!-- Удаление записи из БД -->
 <!-- Сохранение записи в БД -->
 <?php
 if ($_SERVER['REQUEST_METHOD']=='POST'){
@@ -61,25 +83,4 @@ echo '<p>Всего записей в гостевой книге - ',$count,'</
 ?>
 
 <!-- Вывод записей из БД -->
-<!-- Удаление записи из БД -->
-<?php
-if ($_SERVER['REQUEST_METHOD']=='GET'){
-	if (isset($_GET['del'])){
-		$delid=(int)$_GET['del'];
-		
-		$str=$_SERVER['REQUEST_URI'];
-		while (strripos($str,'&')){
-			$i=strripos($str,'&');
-			$str=substr($str,0,($i));
-		}
-		//echo $str,'<br>';
-		$sql="delete from msgs where id='$delid'";
-		mysqli_query($link,$sql);
-		header('Location: '.$str);
-		//exit();
-		
-		
-	}
-}
-?>
-<!-- Удаление записи из БД -->
+

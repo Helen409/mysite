@@ -36,5 +36,6 @@
 				array('link'=>'Калькулятор',       'href'=>'index.php?id=calc'),
 				array('link'=>'Тест',       'href'=>'test/index.php'),
 				array('link'=>'Гостевая книга',       'href'=>'index.php?id=gbook'),
+				array('link'=>'Магазин',       'href'=>'eshop/catalog.php'),
 			);
 		?>
