@@ -82,7 +82,7 @@ function saveOrder($datetime,$orderid){
 		mysqli_stmt_execute($stmt);
 	}
 	mysqli_stmt_close($stmt);
-	setcookie('Basket');
+	setcookie('basket','',time(-3600));
 	return true;
 }
 function getOrders(){

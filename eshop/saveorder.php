@@ -17,8 +17,9 @@
 		//echo $order;die();
 	//	echo $ORDERS_LOG;die();
 		$flink=fopen('admin/'.ORDERS_LOG,'a-');
-		fputs($flink,$order);
+		fputs($flink,$order.PHP_EOL);
 		saveOrder($datetime,$orderid);
+		fclose($flink);
 ?>
 <html>
 <head>
