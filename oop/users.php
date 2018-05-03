@@ -1,54 +1,43 @@
 <?php
-class User{
-	public $name;
-	public $login;
-	public $password;
-	public function showInfo(){
-		echo 'Имя пользователя: ',$this->name;
-		echo ' Логин: ',$this->login;
-		echo ' Пароль: ',$this->password;
-		$this->myHr();
-	}
-	public function myHr(){
-		echo '<hr/>';
-	}
-	public function __construct($name,$login,$password){
-		$this->name=$name;
-		$this->login=$login;
-		$this->password=$password;
-	}
-	public function __destruct(){
-		echo 'Пользователь ',$this->name,' удален';
-		$this->myHr();
-	}
-	public function __clone(){
-		$this->name='';
-		$this->login='';
-		$this->password='';
-	}
-}
-class SuperUser extends User{
-	public $role;
-	public function showInfo(){
-		parent::ShowInfo();
-		echo 'Роль: ',$this->role;
-		$this->myHr();
-	}
-	public function __construct($name,$login,$password,$role){
-		parent::__construct($name,$login,$password);
-		$this->role=$role;
-		
-	}
-}
-$user=new SuperUser('Администратор','admin','qwerty','admin');
+/*function __autoload($class_name){
+	$filename=$class_name.'.class.php';
+	require_once ($filename);
+}*/
+
+include ('User.class.php');
+include ('SuperUser.class.php');
+include ('Auser.class.php');
+include ('ISuperUser.class.php');
+
+
+
+
 $user1=new User('Вася','vasya23','123456');
 $user2=new User('Света','Sveta','123456');
 $user3=new User('Таня','tanushka','123456');
 $user4=clone $user3;
-
+$suser=new SuperUser('Администратор','admin','qwerty','admin');
 echo $user1->showInfo();
 echo $user2->showInfo();
 echo $user3->showInfo();
 echo $user4->showInfo();
-echo $user->showInfo();
+echo $suser->showInfo();
+$s=get_class($suser);
+echo $suser->getInfo($s);
+
+abstract class Car{
+	public $petrol;
+	abstract function startEngine();
+	abstract function stopEngine();
+}
+class Toyota extends Car{
+	function startEngine(){
+		
+	}
+	function stopEngine(){
+		
+	}
+}
+$toyota=new Toyota();
+
 ?> 
